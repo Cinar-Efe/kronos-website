@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<script defer src="/_vercel/insights/script.js"></script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kronos — Time to ship</title>
+<title>Kronos — Titan of your timeline</title>
 <meta name="description" content="Autonomous AI agent that transforms your releases into ready-to-publish content for every platform. 7 languages. 6 platforms. One command.">
-<meta property="og:title" content="Kronos — Time to ship">
+<meta property="og:title" content="Kronos — Titan of your timeline">
 <meta property="og:description" content="Autonomous AI agent that transforms your releases into content for every platform.">
 <meta property="og:image" content="./kronos-banner.png">
 <meta property="og:type" content="website">
@@ -25,8 +24,8 @@
   --gold: #ffd60a;
   --gold-dark: #c9a507;
   --gold-light: #ffea5c;
-  --red: #e63946;
-  --red-dark: #b42d3a;
+  --beige: #d4a574;
+  --beige-light: #e8c9a0;
   --green: #7ce38b;
   --blue: #58a6ff;
   --text: #f0e9d2;
@@ -277,9 +276,11 @@ body::after {
 }
 
 .hero-logo {
-  <div class="hero-logo">
-  <img src="kronos-logo.png" width="160" height="160" alt="Kronos Logo" style="border-radius:50%;">
-</div>
+  width: 160px;
+  height: 160px;
+  margin-bottom: 40px;
+  position: relative;
+  animation: logoFloat 0.8s 0.4s var(--transition) backwards, floating 4s ease-in-out infinite 1.2s;
 }
 
 @keyframes logoFloat {
@@ -1224,12 +1225,6 @@ section {
   .footer-content { flex-direction: column; text-align: center; }
 }
 </style>
-
-<!-- Vercel Web Analytics -->
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -1287,7 +1282,7 @@ section {
   </div>
 
   <h1 class="hero-title">KRONOS</h1>
-  <div class="hero-subtitle">— Time to ship —</div>
+  <div class="hero-subtitle">— Titan of your timeline —</div>
   <div class="hero-divider"></div>
 
   <p class="hero-description">
@@ -1316,7 +1311,7 @@ section {
     </div>
     <div class="terminal-body">
       <div class="terminal-line">
-        <span class="terminal-prompt">$</span> <span class="terminal-cmd">kronos ship --release v0.1.0 --language en-US</span>
+        <span class="terminal-prompt">$</span> <span class="terminal-cmd">kronos generate --release v0.1.0 --language en-US</span>
       </div>
       <div class="terminal-line">
         <span class="terminal-comment"># analyzing commits...</span>
@@ -1529,7 +1524,7 @@ section {
         <div class="terminal-title">kronos · output</div>
       </div>
       <div class="terminal-body">
-        <div><span class="terminal-prompt">$</span> <span class="terminal-cmd">kronos ship --release v0.1.0</span></div>
+        <div><span class="terminal-prompt">$</span> <span class="terminal-cmd">kronos generate --release v0.1.0</span></div>
         <div>&nbsp;</div>
         <div><span class="terminal-comment">[ analyzing git history ]</span></div>
         <div><span class="terminal-success">✓</span> 47 commits parsed</div>
@@ -1634,7 +1629,7 @@ section {
       <p style="color: var(--text-2); font-size: 14px; margin-bottom: 8px;">
         Done. Watch the magic.
       </p>
-      <div class="install-code">kronos ship --release v1.0.0</div>
+      <div class="install-code">kronos generate --release v1.0.0</div>
     </div>
   </div>
 </section>
@@ -1688,7 +1683,7 @@ section {
       </div>
       <div class="faq-answer">
         <div class="faq-answer-inner">
-          Absolutely. Set the <code>OPENAI_API_KEY</code> environment variable and run <code>kronos ship --release $VERSION</code>. GitHub Actions example is in the README.
+          Absolutely. Set the <code>OPENAI_API_KEY</code> environment variable and run <code>kronos generate --release $VERSION</code>. GitHub Actions example is in the README.
         </div>
       </div>
     </div>
