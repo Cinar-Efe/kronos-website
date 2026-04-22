@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kronos — Titan of your timeline</title>
+<meta name="description" content="AI agent that transforms your releases into viral-optimized content for 12 platforms. 7 languages. One command.">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R85HZBXNL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3R85HZBXNL');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #050811;
+  --bg-glass: rgba(5, 8, 17, 0.85);
+  --gold: #ffd60a;
+  --gold-glow: rgba(255, 214, 10, 0.5);
+  --beige: #d4a574;
+  --beige-light: #e8c9a0;
+  --text: #f0e9d2;
+  --text-dim: #a8a29e;
+  --border: rgba(255, 214, 10, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #050811 0%, #0d1120 100%);
+  color: var(--text);
+  font-family: 'Space Mono', monospace;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255, 214, 10, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(212, 165, 116, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+  backdrop-filter: blur(80px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-glass);
+  backdrop-filter: blur(30px) saturate(150%);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+  z-index: 100;
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--gold);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 20px var(--gold-glow);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--gold);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem 2rem 4rem;
+  position: relative;
+}
+
+.hero-logo {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 30px var(--gold-glow));
+  animation: float 4s ease-in-out infinite, glow 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 20px var(--gold-glow));
+  }
+  50% {
+    filter: drop-shadow(0 0 40px var(--gold-glow));
+  }
+}
+
+.hero-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 0.3em;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 30px var(--gold-glow);
+  animation: fadeInScale 1s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: var(--beige);
+  font-style: italic;
+  margin-bottom: 3rem;
+  animation: fadeIn 1s ease-out 0.3s both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.terminal {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  padding: 2rem;
+  font-family: 'Space Mono', monospace;
+  color: var(--text);
+  margin: 2rem 0;
+  animation: terminalPulse 2s ease-in-out infinite, fadeIn 1s ease-out 0.6s both;
+  box-shadow: 0 0 30px rgba(255, 214, 10, 0.3), inset 0 0 20px rgba(255, 214, 10, 0.1);
+}
+
+@keyframes terminalPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 214, 10, 0.3), inset 0 0 15px rgba(255, 214, 10, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 214, 10, 0.5), inset 0 0 25px rgba(255, 214, 10, 0.2);
+  }
+}
+
+.terminal-prompt {
+  color: #7ce38b;
+}
+
+.terminal-cmd {
+  color: var(--gold);
+  animation: blink 1.5s steps(2) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.5; }
+}
+
+.hero-description {
+  max-width: 700px;
+  margin: 2rem auto;
+  color: var(--text);
+  font-size: 1.2rem;
+  animation: fadeIn 1s ease-out 0.9s both;
+}
+
+.btn {
+  display: inline-block;
+  padding: 1.2rem 3rem;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--beige) 100%);
+  color: #0a0e27;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s;
+  animation: fadeIn 1s ease-out 1.2s both;
+  box-shadow: 0 5px 30px rgba(255, 214, 10, 0.4);
+}
+
+.btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 50px rgba(255, 214, 10, 0.6);
+}
+
+.platforms {
+  padding: 6rem 2rem;
+  position: relative;
+}
+
+.platforms h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  text-align: center;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px var(--gold-glow);
+  letter-spacing: 0.2em;
+}
+
+.platforms-subtitle {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 1.2rem;
+  margin-bottom: 4rem;
+}
+
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.platform-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.4s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.platform-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 214, 10, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.platform-card:hover::before {
+  opacity: 1;
+}
+
+.platform-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--gold);
+  box-shadow: 0 10px 40px rgba(255, 214, 10, 0.3);
+}
+
+.platform-icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 1.5rem;
+  transition: transform 0.4s;
+}
+
+.platform-card:hover .platform-icon {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.platform-card h3 {
+  color: var(--gold);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.platform-card p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+.features {
+  padding: 6rem 2rem;
+}
+
+.features h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  text-align: center;
+  color: var(--gold);
+  margin-bottom: 4rem;
+  text-shadow: 0 0 20px var(--gold-glow);
+  letter-spacing: 0.2em;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.4s;
+}
+
+.feature-card:hover {
+  border-color: var(--beige);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(212, 165, 116, 0.2);
+}
+
+.feature-card h3 {
+  color: var(--gold);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.feature-card p {
+  color: var(--text-dim);
+}
+
+.install {
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.install h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--gold);
+  margin-bottom: 3rem;
+  text-shadow: 0 0 20px var(--gold-glow);
+  letter-spacing: 0.2em;
+}
+
+.install-code {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  padding: 1.5rem;
+  font-family: 'Space Mono', monospace;
+  color: var(--gold);
+  font-size: 1.2rem;
+  margin: 1.5rem auto;
+  max-width: 700px;
+  box-shadow: 0 0 20px rgba(255, 214, 10, 0.2);
+}
+
+footer {
+  padding: 4rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+footer a {
+  color: var(--gold);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: var(--beige-light);
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+    letter-spacing: 0.1em;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .platform-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-content">
+    <a href="#" class="nav-logo">⌛ KRONOS</a>
+    <ul class="nav-links">
+      <li><a href="#platforms">PLATFORMS</a></li>
+      <li><a href="#features">FEATURES</a></li>
+      <li><a href="#install">INSTALL</a></li>
+      <li><a href="https://github.com/Cinar-Efe/kronos-agent" target="_blank">GITHUB</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-logo">
+    <img src="kronos-logo.png" width="200" height="200" alt="Kronos Logo">
+  </div>
+  <h1 class="hero-title">KRONOS</h1>
+  <p class="hero-subtitle">— Titan of your timeline —</p>
+  
+  <div class="terminal">
+    <span class="terminal-prompt">$</span> <span class="terminal-cmd">kronos generate --release v1.0.0</span>
+  </div>
+  
+  <p class="hero-description">
+    AI agent that transforms your releases into viral-optimized content for 12 platforms. 7 languages. One command.
+  </p>
+  
+  <a href="#install" class="btn">Get Started</a>
+</section>
+
+<section id="platforms" class="platforms">
+  <div class="container">
+    <h2>12 PLATFORMS</h2>
+    <p class="platforms-subtitle">Viral-optimized content for every major platform</p>
+    
+    <div class="platform-grid">
+      <div class="platform-card">
+        <img src="https://cdn.simpleicons.org/x/FFFFFF" class="platform-icon" alt="X (Twitter)">
+        <h3>X / Twitter</h3>
+        <p>Viral tweets & threads optimized for engagement</p>
+      </div>
+      
+      <div class="platform-card">
+        <img src="https://cdn.simpleicons.org/linkedin/0A66C2" class="platform-icon" alt="LinkedIn">
+        <h3>LinkedIn</h3>
+        <p>Professional updates that drive conversations</p>
+      </div>
+      
+      <div class="platform-card">
+        <img src="https://cdn.simpleicons.org/youtube/FF0000" class="platform-icon" alt="YouTube">
+        <h3>YouTube</h3>
+        <p>Video descriptions with chapters & timestamps</p>
+      </div>
+      
+      <div class="platform-card">
+        <img src="https://cdn.simpleicons.org/gmail/EA4335" class="platform-icon" alt="Email">
+        <h3>Email</h3>
+        <p>Newsletter-ready announcements</p>
+      </div>
+      
+      <div class="platform-card">
+        <img src="https://cdn.simpleicons.org/reddit/FF4500" class="platform-icon" alt="Reddit">
+        <h3>Reddit</h3>
+        <p>Community posts with TL;DR format</p>
+      </div>
+      
+      <div class="platform-card">
+        <img src="https://cdn.simpleicons.org/whatsapp/25D366" class="platform-icon" alt="WhatsApp">
+        <h3>WhatsApp</h3>
+        <p>Emoji-rich mobile messages (1024 chars)</p>
+      </div>
+      
+      <div class="platform-card">
+        <img src="https://cdn.simpleicons.org/telegram/26A5E4" class="platform-icon" alt="Telegram">
+        <h3>Telegram</h3>
+        <p>Channel-optimized markdown content</p>
+      </div>
+      
+      <div class="platform-card">
+        <img src="https://cdn.simpleicons.org/tiktok/FFFFFF" class="platform-icon" alt="TikTok">
+        <h3>TikTok</h3>
+        <p>Video scripts + captions + hashtags</p>
+      </div>
+      
+      <div class="platform-card">
+        <img src="https://cdn.simpleicons.org/twitch/9146FF" class="platform-icon" alt="Twitch">
+        <h3>Twitch</h3>
+        <p>Stream announcements & descriptions</p>
+      </div>
+      
+      <div class="platform-card">
+        <img src="https://cdn.simpleicons.org/instagram/E4405F" class="platform-icon" alt="Instagram">
+        <h3>Instagram</h3>
+        <p>Carousel posts, Reels & Stories</p>
+      </div>
+      
+      <div class="platform-card">
+        <img src="https://cdn.simpleicons.org/discord/5865F2" class="platform-icon" alt="Discord">
+        <h3>Discord</h3>
+        <p>Server announcements with embeds & reactions</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="features">
+  <div class="container">
+    <h2>FEATURES</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>🌍 7 Languages</h3>
+        <p>English (US/UK), French, Chinese, Russian, German, Spanish</p>
+      </div>
+      <div class="feature-card">
+        <h3>📱 12 Platforms</h3>
+        <p>Viral-optimized content for social media & messaging</p>
+      </div>
+      <div class="feature-card">
+        <h3>🤖 AI-Powered</h3>
+        <p>OpenAI GPT-4o-mini integration (~$0.004 per release)</p>
+      </div>
+      <div class="feature-card">
+        <h3>🎨 4 Tones</h3>
+        <p>Professional, casual, excited, technical</p>
+      </div>
+      <div class="feature-card">
+        <h3>⚡ Parallel Generation</h3>
+        <p>All platforms generated simultaneously</p>
+      </div>
+      <div class="feature-card">
+        <h3>📝 Smart Parsing</h3>
+        <p>Understands conventional commits automatically</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="install" class="install">
+  <div class="container">
+    <h2>INSTALL</h2>
+    <div class="install-code">npm install -g kronos-agent</div>
+    <div class="install-code">kronos config</div>
+    <div class="install-code">kronos generate --release v1.0.0</div>
+    
+    <p style="margin: 3rem 0;">
+      <a href="https://github.com/Cinar-Efe/kronos-agent" target="_blank" class="btn">⭐ STAR ON GITHUB</a>
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>The titan of time · master of your timeline · MIT License</p>
+    <p style="margin-top: 1rem;">
+      Built with ⌛ by <a href="https://github.com/Cinar-Efe" target="_blank">Cinar-Efe</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
